@@ -1,0 +1,57 @@
+/*------------------------------------*\
+  #BASE
+\*------------------------------------*/
+@import url("https://fonts.googleapis.com/css?family=Ubuntu");
+
+* {
+  box-sizing: border-box;
+}
+
+//Prevent default outline when selected
+:hover,
+:active,
+:focus,
+:visited {
+  outline: none !important;
+  outline: 0px !important;
+  box-shadow: none;
+  -webkit-appearance: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: $light-white;
+  font-family: "Ubuntu", sans-serif;
+}
+
+h2 {
+  font-size: 2.2rem;
+}
+
+h3,
+h2,
+p,
+li {
+  color: $grey;
+}
+
+h3,
+li,
+button,
+input,
+select,
+textarea,
+p,
+a {
+  font-size: 1.1rem;
+  @include medium {
+    font-size: 1.3rem;
+  }
+}

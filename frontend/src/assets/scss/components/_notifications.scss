@@ -1,0 +1,205 @@
+/*------------------------------------*\
+  #NOTIFICATIONS
+\*------------------------------------*/
+
+//NEW MEMBERS
+.members-grid {
+  padding: 1.6rem 0 1.6rem 0;
+  display: grid;
+  grid-template-columns: 5rem 2fr 1fr;
+  grid-template-rows: 2.2rem;
+  grid-template-areas:
+    "image name date"
+    "image mail date";
+}
+
+//RECENT ACTIVITY
+.activity-grid {
+  padding: 1.6rem 0 1.6rem 0;
+  display: grid;
+  grid-template-columns: 5rem 10fr 1fr;
+  grid-template-rows: 2.5rem;
+  grid-template-areas:
+    "image comment sign"
+    "image time sign";
+}
+
+.activity-grid:not(:last-child),
+.members-grid:not(:last-child) {
+  border-bottom: 0.1rem solid $light-grey;
+}
+
+.member-img {
+  grid-area: image;
+  width: 85%;
+  border-radius: 50%;
+  padding-right: 0.7rem;
+}
+.member-name {
+  grid-area: name;
+  margin: 0;
+}
+.member-mail {
+  grid-area: mail;
+  color: $purple;
+}
+.member-date {
+  grid-area: date;
+  text-align: end;
+}
+.member-comment {
+  grid-area: comment;
+  margin: 0;
+}
+.member-time {
+  grid-area: time;
+  margin: 0;
+}
+.sign {
+  grid-area: sign;
+  font-size: 2.2rem;
+  color: $purple;
+  margin: 0;
+  text-align: right;
+}
+
+//Bell badges
+.badge {
+  display: none;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  border-radius: 50%;
+  border: 0.1rem solid white;
+  background: $green;
+  color: white;
+  width: 17.5px;
+  height: 17.5px;
+  text-align: center;
+  box-shadow: 0 0 0.1rem #333;
+  font-size: 13px;
+}
+.badge-num {
+  vertical-align: baseline;
+  margin-right: 0.1rem;
+}
+
+// POP UP MENU
+.notification {
+  position: relative;
+}
+.notification-menu {
+  position: absolute;
+  top: 6.2rem;
+  left: -9rem;
+  background-color: $pal-grey;
+  box-shadow: 0 0.6rem 0.9rem 0 rgba(0, 0, 0, 0.2), 0 0.8rem 2rem 0 rgba(0, 0, 0, 0.19);
+  padding: 1rem 1rem 0 1rem;
+  list-style: none;
+  width: 29rem;
+  z-index: 2;
+  &::before {
+    content: "";
+    position: absolute;
+    top: -27.9px;
+    left: 142px;
+    margin-left: -0.5rem;
+    border-width: 1.4rem;
+    border-style: solid;
+    border-color: transparent transparent $pal-grey transparent;
+  }
+}
+.notification-menu li {
+  background-color: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.notification-menu .img {
+  padding: 0.2rem 0;
+}
+.notification-menu h3 {
+  margin: 0 0 0.5rem 0;
+  display: inline;
+}
+.notification-menu p {
+  margin-bottom: 0;
+}
+
+// POP UP CONTENT BOX
+.popuptext {
+  display: grid;
+  grid-template-columns: 1fr 3fr 2rem;
+  grid-template-rows: 1.5rem 2rem 1rem;
+  grid-template-areas:
+    "image name button"
+    "image comment button";
+}
+
+.img {
+  grid-area: image;
+  width: 4rem;
+  border-radius: 50%;
+}
+.name {
+  grid-area: name;
+  margin: 0;
+  text-align: left;
+}
+.comment {
+  grid-area: comment;
+  margin: 0;
+}
+
+.btn-notif {
+  grid-area: button;
+  cursor: pointer;
+  background-color: white;
+  color: #000;
+  border: none;
+  padding: 0.2rem;
+}
+
+#header-li {
+  background-color: $pal-grey;
+}
+.popupalert {
+  text-align: center;
+}
+
+//CONTENT DELETE TRANSITION
+.removed-item {
+  -ms-animation: removed-item-alert 0.4s cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
+  -webkit-animation: removed-item-alert 0.4s cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
+  -moz-animation: removed-item-alert 0.4s cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
+  -o-animation: removed-item-alert 0.4s cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
+  animation: removed-item-alert 0.4s cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
+}
+
+//AUTOCOMPLETE FORM
+.autocomplete {
+  @include flex($dir: column);
+  position: relative;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 0.1rem solid $light-grey;
+  border-bottom: none;
+  border-top: none;
+  z-index: 2;
+  top: 100%;
+  left: 0;
+  right: 0;
+  font-size: 1.3rem;
+}
+.autocomplete-items div {
+  padding: 1rem;
+  cursor: pointer;
+  background-color: white;
+  border-bottom: 0.1rem solid $light-grey;
+}
+.autocomplete-items div:hover,
+.autocomplete-active {
+  background-color: $green !important;
+  color: white;
+}

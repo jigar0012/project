@@ -1,0 +1,255 @@
+
+
+<section class="vh-100 bg-light py-5">
+  <div>
+    <form  [formGroup]="registerForm">
+  
+      <section class="h-100 bg-light" >
+      <div class="container py-7 h-100" >
+      <div class="row d-flex justify-content-center align-items-center h-00">
+      <div class="col">
+      <div class="card card-registration my-4 container-fluid">
+      <div class="container-fluid">
+      
+      <div class="container-fluid">
+      <div class="card-body p-md-5 text-black">
+      <h3 class="mb-5 text-center text-uppercase">Create new Account</h3>
+  
+   
+      
+      <div class="row">
+      <div class="col-md-4 mb-2">
+      <div class="form-outline">
+     
+      <input type="text" class="form-control" id="validationCustom01" value="" placeholder="First Name" formControlName="fname">
+      <div class="form-text text-danger" *ngIf="fname.errors?.['required'] && (fname.touched || fname.dirty)">
+      *First Name is required
+      </div>
+      <div class="form-text text-danger" *ngIf="fname.errors?.['minlength'] && (fname.touched || fname.dirty)">
+      *FirstName is too short
+      </div>
+      <div class="form-text text-danger" *ngIf="fname.errors?.['pattern'] && (fname.touched || fname.dirty)">
+       *First Name Should Start With Alphabet
+      </div>
+      </div>
+      </div>
+  
+      <div class="col-md-4 mb-2">
+          <div class="form-outline">
+          <input type="text" class="form-control" id="validationCustom02" value="" placeholder="Middle Name" >
+          </div>
+      </div>
+  
+      <div class="col-md-4 mb-2">
+          <div class="form-outline">
+          <input type="text" class="form-control" id="validationCustom03" value="" placeholder="Last Name"  formControlName="lname">
+          <div class="form-text text-danger" *ngIf="lname.errors?.['required'] && (lname.touched || lname.dirty)">
+              *Last Name is required
+              </div>
+              <div class="form-text text-danger" *ngIf="lname.errors?.['minlength'] && (lname.touched || lname.dirty)">
+              *Last Name is too short
+              </div>
+              <div class="form-text text-danger" *ngIf="lname.errors?.['pattern'] && (lname.touched || lname.dirty)">
+               *Last Name Should Start With Alphabet
+              </div>
+          </div>
+          </div>
+      
+      </div>
+  
+      <div class="d-md-flex justify-content-start align-items-center mb-4 py-3" >
+      
+        <h6 class="mb-0 me-4"  >Gender: </h6>
+        <div class="form-text text-danger" *ngIf="gender.errors?.['required']  && (gender.touched || gender.dirty)" >
+          *Gender is required
+        </div>
+        
+        <div class="form-check form-check-inline py-3 mb-0 me-4">
+        <input class="form-check-input" type="radio" id="maleGender"
+        value="male" formControlName="gender" name="gender" />
+        <label class="form-check-label" for="maleGender">Male</label>
+        </div>
+        
+        <div class="form-check form-check-inline mb-0 me-4">
+        <input class="form-check-input" type="radio" name="gender" id="femaleGender"
+        value="female"  formControlName="gender" />
+        <label class="form-check-label" for="femaleGender">Female</label>
+        </div>
+        
+        <div class="form-check form-check-inline mb-0">
+        <input class="form-check-input" type="radio" name="gender" id="otherGender"
+        value="other"  formControlName="gender" />
+        <label class="form-check-label" for="otherGender">Other</label>
+        </div>
+        </div>
+  
+        <div class="row">
+  
+          <div class="col-md-6 mb-4">
+              <div class="form-outline">
+              <input type="date" class="form-control" id="validationCustom04" value="" placeholder="Date of Birth" formControlName="dob">
+              <div class="form-text text-danger" *ngIf="dob.errors?.['required'] && (dob.touched || dob.dirty)">
+                  *DateofBirth is required
+                  </div>
+              </div>
+          </div>
+      
+          <div class="col-md-6 mb-4">
+              <div class="form-outline">
+              <input type="text" class="form-control" id="validationCustom05" value="" placeholder="Phone Number" formControlName="phonenum">
+              <div class="form-text text-danger" *ngIf="phonenum.errors?.['required'] && (phonenum.touched || phonenum.dirty)">
+                  *Phone Number is required
+                  </div>
+              </div>
+          </div>
+          
+         </div>
+         
+      <div class="form-outline mb-4">
+      <input type="text" id="validationCustom06" class="form-control form-control-lg" formControlName="address" placeholder="Address"/>
+      <div class="form-text text-danger" *ngIf="address.errors?.['required'] && (address.touched || address.dirty)">
+          *Address is required
+          </div>
+      </div>
+  
+      <form >
+                    
+        <div class="row" >
+        
+          <div class="col-md-4 mb-2 pb-2">
+            <fieldset>
+            <select class="select form-control-lg px-mb-5" style="width: 80%;" #country name="country" id="country" (change)="onCountryChange($event)" formControlName="country1">
+   
+              <option *ngFor="let country of countries" [value]="country | json">
+                {{ country.name }}
+              </option>         
+            </select>
+              
+          </fieldset>
+          <label for="" >Choose Country</label>
+            </div>
+          
+  
+        
+            <div class="col-md-4 mb-2 pb-2">
+              <fieldset>
+            <select class="select form-control-lg px-xl-5" style="width: 90%;"  #state name="state" id="state" formControlName="state1" (change)="onStateChange($event)">
+                <option *ngFor="let state of states" [value]="state | json">
+                  {{ state.name }}
+                </option>
+              </select>
+            </fieldset>
+            <label for="" >Choose State</label>
+            </div>
+  
+        
+           <div class="col-md-4 mb-4 pb-2" >
+            <!-- <label for="city">City:</label><br /><br /> -->
+            <fieldset>
+          <select class="select form-control-lg px-xl-5" style="width: 90%;"  #city  name="city" id="city" formControlName="city1" (change)="onCityChange($event)">
+       
+                <option *ngFor="let city of cities" [value]="city | json">
+                  {{ city.name }}
+                </option>
+            </select>
+          </fieldset>
+          <label for="" >Choose City</label>
+      </div>
+    </div>
+  </form>
+  
+  
+  <div class="container py-2">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="form-outline mb-4 py-4">
+          <input type="file" id="validationCustom07" class="form-control form-control-lg" formControlName="pfp" placeholder="Profile Picture" (change)="onFileSelected($event)" />
+          <div class="form-text text-danger" *ngIf="pfp.errors?.['required'] && (pfp.touched || pfp.dirty)">
+            *Profile Picture is required
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="profile-pic-wrapper">
+          <div class="pic-holder">
+            <!-- uploaded pic shown here -->
+            <img id="profilePic" class="pic" [src]="imagePreview || defaultImageUrl">
+            <!-- Use the defaultImageUrl as the fallback when imagePreview is null or undefined -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+          
+     
+      
+      <div class="d-flex flex-row align-items-center mb-4">
+      
+      <div class="form-outline flex-fill mb-0">
+      <input type="email" id="validationCustom08" class="form-control" formControlName="email" placeholder="E-mail"/>
+      <div class="form-text text-danger" *ngIf="email.errors?.['required'] && (email.touched || email.dirty)">
+          *E-mail is required
+          </div>
+          <div class="form-text text-danger" *ngIf="email.errors?.['email'] && (email.touched || email.dirty)">
+              *E-mail is Invalid
+           </div>
+      </div>
+      </div>
+      
+      
+      
+      <div class="d-flex flex-row align-items-center mb-4">
+  
+        <div class="form-outline flex-fill position-relative mb-0">
+          <input type="{{ showPassword ? 'text' : 'password' }}" id="form3Example4" class="form-control bi" formControlName="password" placeholder="password">
+          <div class="eye-button-wrapper">
+            <a (click)="togglePassword()" class="eye-b">
+              <i class="{{ showPassword ? 'fas fa-eye-slash' : 'fas fa-eye' }}" style="color: black;"></i>
+            </a>
+          </div>
+          <div class="form-text text-danger" *ngIf="password.errors?.['required'] && (password.touched || password.dirty)">
+            *Password is required
+          </div>
+          <div class="form-text text-danger" *ngIf="(password.errors?.['minlength'] || password.errors?.['maxlength']) && (password.touched || password.dirty)">
+            *Password should be between 6 and 15 characters
+          </div>
+        </div>
+      </div>
+      
+      <div class="d-flex flex-row align-items-center mb-4">
+  
+        <div class="form-outline flex-fill position-relative mb-0">
+          <input type="{{ showPassword ? 'text' : 'password' }}" id="form3Example4" class="form-control bi" formControlName="confirmPassword" placeholder="Confirm password">
+          <div class="eye-button-wrapper">
+            <a (click)="togglePassword()" class="eye-b">
+              <i class="{{ showPassword ? 'fas fa-eye-slash' : 'fas fa-eye' }}" style="color: black;"></i>
+            </a>
+          </div>
+          <div class="form-text text-danger" *ngIf="confirmPassword.errors?.['required'] && (confirmPassword.touched || confirmPassword.dirty)">
+            *Confirm Password is Required
+        </div>
+          <div class="form-text text-danger" *ngIf="password.value !== confirmPassword.value">
+              *Confirm Password & Password Should be same
+          </div>
+        </div>
+      </div>
+      
+      <div class="d-flex justify-content-between pt-3">
+      <button type="button" class="btn btn-light btn-lg" (click)="resetForm()">Reset all</button>
+      <button type="submit" class="btn btn-dark btn-lg ms-2" (click)=onsubmit()>Create</button>
+      </div>
+      
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </section>
+      </form>
+  </div>
+  </section>

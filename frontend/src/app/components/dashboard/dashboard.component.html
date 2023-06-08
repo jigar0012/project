@@ -1,0 +1,209 @@
+<body class="fix-header">
+  <div id="wrapper">
+    <nav class="navbar navbar-default navbar-static-top m-b-0">
+      <div class="navbar-header">
+        <div class="top-left-part"></div>
+        <ul class="nav navbar-top-links navbar-right pull-right">
+          <li>
+            <a class="profile-pic"><b class="hidden-xs"></b></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="navbar-default sidebar" role="navigation">
+      <div class="sidebar-nav slimscrollsidebar">
+        <ul class="nav" id="side-menu">
+          <li style="padding: 70px 0 0">
+            <a routerLink="dash" class="waves-effect"
+              ><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i
+              >Dashboard</a
+            >
+          </li>
+          <li>
+            <a [routerLink]="['user/', adminId]" class="waves-effect"
+              ><i class="fa fa-user fa-fw" aria-hidden="true"></i>Profile</a
+            >
+          </li>
+          <li>
+            <a (click)="signout()"  class="waves-effect"
+              ><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>Log out</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="page-wrapper">
+      <div class="container-fluid">
+        <div class="row bg-title">
+          <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title" routerLink="dash">Dashboard</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="white-box">
+              <div class="row">
+                <div class="col-auto me-auto">
+                  <h3 class="box-title">Users</h3>
+                </div>
+                <div class="col-auto d-flex justify-content-end">
+                  <div class="form-outline">
+                    <input
+                    type="search"
+                    id="form1"
+                    class="form-control"
+                    #searchInput
+                    placeholder="Search"
+                  />
+                  <i class="fas fa-times-circle position-absolute top-50 end-0 translate-middle-y pe-2 cursor-pointer"
+                    (click)='clearSearchInput()'></i>
+                  </div>
+                  <button
+                    class="btn btn-dark"
+                    type="button"
+                    (click)="search(searchInput.value)"
+                  >
+                    <i class="fas fa-search"></i>
+                  </button>
+                  <div
+                    class="dropdown"
+                    style="margin-left: 2px; margin-top: 2px"
+                  >
+                    <button
+                      class="btn btn-secondary dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Sort
+                    </button>
+                    <ul
+                      class="dropdown-menu dropdown-menu-end"
+                      aria-labelledby="dropdownMenuButton"
+                    >
+                      <li *ngFor="let column of columns">
+                        <a class="dropdown-item" (click)="sortTable(column)">{{
+                          column
+                        }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Profile</th>
+                      <th>FIRST NAME</th>
+                      <th>LAST NAME</th>
+                      <th>EMAIL</th>
+                      <th>DATE OF BIRTH</th>
+                      <th>PHONE NO</th>
+                      <th>DELETE</th>
+                      <th>VIEW</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let user of pagedUsers">
+                      <td>
+                        <img
+                          [src]="user.pfp"
+                          alt="user-img"
+                          width="50"
+                          height="50"
+                          class="img-circle"
+                          [routerLink]="['user/' + user.id]"
+                        />
+                      </td>
+                      <td>{{ user.fname }}</td>
+                      <td>{{ user.lname }}</td>
+                      <td>{{ user.email }}</td>
+                      <td>{{ user.dob }}</td>
+                      <td>{{ user.phonenum }}</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-outline-dark"
+                          (click)="deleteItem(user.id)"
+                        >
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-outline-dark"
+                          [routerLink]="['user/' + user.id]"
+                        >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="pagination-container">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item" [class.disabled]="currentPage === 1">
+                    <a class="page-link" (click)="prevPage()" tabindex="-1"
+                      >Previous</a
+                    >
+                  </li>
+                  <li
+                    class="page-item"
+                    *ngFor="let page of pages"
+                    [class.active]="currentPage === page"
+                  >
+                    <a
+                      class="page-link text-white"
+                      style="background-color: black"
+                      (click)="setPage(page)"
+                      >{{ page }}</a
+                    >
+                  </li>
+                  <li
+                    class="page-item"
+                    [class.disabled]="currentPage === totalPages"
+                  >
+                    <a class="page-link" (click)="nextPage()">Next</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" (click)="goToLastPage()">Last Page</a>
+                  </li>
+                </ul>
+                <div
+                  class="jump-page d-flex justify-content-center align-items-center"
+                >
+                  <input
+                    type="number"
+                    #jumpInput
+                    min="1"
+                    max="{{ totalPages }}"
+                    class="form-control me-2"
+                  />
+                  <button
+                    class="btn btn-dark"
+                    (click)="jumpTo(jumpInput.value)"
+                  >
+                    Go
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="white-box">
+              <h3 class="box-title">Users Activity</h3>
+              <canvas id="lineChart" width="200" height="40"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

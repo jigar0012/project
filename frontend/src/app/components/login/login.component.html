@@ -1,0 +1,77 @@
+<div>
+  <form action="" [formGroup]="loginForm">
+    <section class="vh-100 bg-light">
+   
+      <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+          
+          <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <form id="loginForm" >
+              <!-- Email input -->
+              <div class="d-flex flex-row align-items-center mb-4">
+                <i class="fas fa-envelope fa-lg me-3 fa-fw  mb-4"></i>
+                <div class="form-outline flex-fill mb-0">
+                  <input type="email"  id="form3Example4c" class="form-control" formControlName="email"/>
+                  <label class="form-label" for="form3Example4c" >E-mail</label>
+                  <div class="form-text text-danger" *ngIf="email.errors?.['required'] && (email.touched || email.dirty)">
+                    *E-mail is required
+                    </div>
+                    <div class="form-text text-danger" *ngIf="email.errors?.['email'] && (email.touched || email.dirty)">
+                        *E-mail is Invalid
+                     </div>  
+                </div>
+              </div>
+
+             
+
+              <div class="d-flex flex-row align-items-center mb-4">
+                <i class="fas fa-lock fa-lg me-3 fa-fw mb-4"></i>
+                <div class="form-outline flex-fill position-relative mb-0">
+                  <input type="{{ showPassword ? 'text' : 'password' }}" id="form3Example4" class="form-control bi" formControlName="password">
+                  <label class="form-label" for="form3Example4">Password</label>
+                  <div class="eye-button-wrapper">
+                    <a (click)="togglePassword()" class="eye-b">
+                      <i class="{{ showPassword ? 'fas fa-eye-slash' : 'fas fa-eye' }}" style="color: black;"></i>
+                    </a>
+                  </div>
+                  <div class="form-text text-danger" *ngIf="password.errors?.['required'] && (password.touched || password.dirty)">
+                    *Password is required
+                  </div>
+                  <div class="form-text text-danger" *ngIf="(password.errors?.['minlength'] || password.errors?.['maxlength']) && (password.touched || password.dirty)">
+                    *Password should be between 6 and 15 characters
+                  </div>
+                </div>
+              </div>
+              
+              
+              
+            
+  
+              <div class="d-flex justify-content-around align-items-center mb-4">
+                <!-- Checkbox -->
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="rememberCheckbox"  />
+                  <label class="form-check-label" for="rememberCheckbox"> Remember me </label>
+                </div>
+                <a class="link-dark" routerLink="fp">Forgot password?</a>
+              </div>
+  
+              <!-- Submit button -->
+              <div class="text-center pt-1 mb-5 pb-1">
+                <button type="button" class="btn btn-dark btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;"  (click)="onLogin()" >Login</button>
+              </div>
+              
+              <div class="d-flex align-items-center justify-content-center pb-4">
+                <p class="mb-0 me-2">Don't have an account?</p>
+                <button type="button" class="btn btn-outline-dark" routerLink="reg"> Create new</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>
+</div>
+  
+

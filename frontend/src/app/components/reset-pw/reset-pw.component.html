@@ -1,0 +1,48 @@
+<form [formGroup]="resetPassForm">
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card bg-light text-dark" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+      
+                  <div class="mb-md-5 mt-md-4 pb-5">
+      
+                    <h2 class="fw-bold mb-2 text-uppercase">Reset Password</h2>
+                    <br>
+                    <br>    
+                    <div class="form-outline form-white mb-4">
+                      <input type="password" id="typeEmailX" class="form-control form-control-lg bg-white text-dark" placeholder="New Password" formControlName="password"/>
+                      <div class="form-text text-danger" *ngIf="password.errors?.['required'] && (password.touched || password.dirty)">
+                        *Password is required
+                     </div>
+                    <div class="form-text text-danger" *ngIf="password.errors?.['minlength'] || password.errors?.['maxlength']&& (password.touched || password.dirty)">
+                            *Password Should be at least betwween 6 to 15 characters
+                     </div>
+              
+                      <label class="form-label" ></label>
+                    </div>
+
+                    <div class="form-outline form-white mb-4">
+                        <input type="password" id="typeEmail" class="form-control form-control-lg bg-white text-dark" placeholder="Confirm Password" formControlName="confirmPassword"/>
+                        <div class="form-text text-danger" *ngIf="confirmPassword.errors?.['required'] && (confirmPassword.touched || confirmPassword.dirty)">
+                            *Confirm Password is Required
+                        </div>
+                          <div class="form-text text-danger" *ngIf="password.value !== confirmPassword.value">
+                              *Confirm Password & Password Should be same
+                          </div>         
+                        <label class="form-label" ></label>
+                      </div>
+                        
+                    <button class="btn btn-outline-dark btn-lg px-5" type="submit" (click)="onsubmit()" >Reset Password</button>
+      
+                  </div>
+      
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+</form>

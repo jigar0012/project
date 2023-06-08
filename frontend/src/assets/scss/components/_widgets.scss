@@ -1,0 +1,55 @@
+/*------------------------------------*\
+  #WIDGETS
+\*------------------------------------*/
+
+//CHARTS
+.chart-1,
+.chart-2,
+.chart-3 {
+  position: relative;
+  max-width: 100% !important;
+}
+
+//SOCIAL ICONS
+.widgets {
+  @include flex($dir: column, $just: space-around);
+  @include large {
+    flex-direction: row;
+  }
+}
+
+.social-info {
+  margin: 0 1.6rem 2.8rem 1.6rem;
+  border: 0.1rem solid $light-grey;
+  background-color: $light-white;
+  border-radius: 0.8rem;
+  padding: 0 3.2rem 0 0.6rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 2.7rem 1fr;
+  grid-template-areas:
+    "icon label"
+    "icon stats";
+  @include medium {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: ". icon label ." ". icon stats .";
+  }
+}
+
+.social-icons {
+  grid-area: icon;
+  width: 8rem;
+  height: 10rem;
+  margin: 0.75rem 2rem 0 0;
+}
+
+.widget-label {
+  grid-area: label;
+  color: $purple;
+}
+
+.widget-stats {
+  grid-area: stats;
+  font-size: 4rem;
+  margin: 2rem 0;
+}
